@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta.__legacy__"
+
+[project]
+name = "vsce-downloads"
+version = "0.1.0"
+dependencies = [
+  "requests>=2.25.0"
+]
+description = "Fetch VSCode Marketplace extension download & rating stats"
+license = { file = "LICENSE" }
+authors = [{ name = "Your Name", email = "your@email.com" }]
+requires-python = ">=3.7"
+
+[project.urls]
+"Homepage" = "https://github.com/knighthood2001/vsce-downloads"
