@@ -5,6 +5,7 @@ HEADERS = {
     "Content-Type": "application/json",
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
 }
+REQUEST_TIMEOUT = 15
 
 
 def get_extension_stats(extension_id: str) -> dict:
@@ -29,11 +30,15 @@ def get_extension_stats(extension_id: str) -> dict:
         "flags": 1792
     }
 
-    resp = requests.post(API_URL, json=payload, headers=HEADERS)
+    resp = requests.post(API_URL, json=payload, headers=HEADERS, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
     data = resp.json()
 
-    ext = data["results"][0]["extensions"][0]
+    try:
+        ext = data["results"][0]["extensions"][0]
+    except (KeyError, IndexError) as exc:
+        raise ValueError(f"Extension not found: {extension_id}") from exc
+
     stats = ext["statistics"]
 
     res = {}

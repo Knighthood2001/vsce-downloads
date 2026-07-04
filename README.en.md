@@ -1,47 +1,47 @@
 # vsce-downloads
 
-[English](README.en.md)
+[中文](README.md)
 
-获取 VSCode Marketplace 扩展的下载量、安装量、评分等统计数据。
+Fetch VSCode Marketplace extension download, install, and rating stats.
 
-`vsce-downloads` 可以作为 Python 功能包使用，也可以作为命令行工具使用。
-安装后会提供 `vsced` 命令。
+`vsce-downloads` can be used as a Python package or as a command line tool.
+After installation it provides the `vsced` command.
 
-## 安装
+## Installation
 
-从当前项目目录安装：
+Install from a local checkout:
 
 ```bash
 pip install .
 ```
 
-从已构建的 wheel 文件安装：
+Install from a built wheel:
 
 ```bash
 pip install dist/vsce_downloads-0.1.0-py3-none-any.whl
 ```
 
-## 命令行用法
+## CLI Usage
 
-通过 VSCode 扩展 ID 查询统计数据：
+Query a VSCode extension by its Marketplace id:
 
 ```bash
 vsced ms-python.python
 ```
 
-输出 JSON，便于脚本处理：
+Print JSON for scripts:
 
 ```bash
 vsced ms-python.python --json
 ```
 
-查看已安装的 CLI 版本：
+Show the installed CLI version:
 
 ```bash
 vsced --version
 ```
 
-输出示例：
+Example output:
 
 ```text
 ==== VSCode 插件统计信息 ====
@@ -56,7 +56,7 @@ VSIX 离线包网页下载量：3456
 月日均新增：56.00
 ```
 
-## Python 用法
+## Python Usage
 
 ```python
 from vsce_downloads import get_extension_stats, print_stats
@@ -67,7 +67,7 @@ stats = get_extension_stats("ms-python.python")
 print(stats["total_install"])
 ```
 
-`get_extension_stats()` 返回一个字典：
+`get_extension_stats()` returns a dictionary:
 
 ```python
 {
@@ -83,26 +83,27 @@ print(stats["total_install"])
 }
 ```
 
-## 开发与打包
+## Development
 
-构建源码包和 wheel 包：
+Build source and wheel distributions:
 
 ```bash
 python3 -m build
 ```
 
-如果本地 Python 环境缺少 `venv`，或者 `setuptools` 版本不够新，也可以使用下面的旧式命令构建：
+If your local Python environment does not have `venv` or a new enough
+`setuptools`, this legacy command can also build the package:
 
 ```bash
 python3 setup.py sdist bdist_wheel
 ```
 
-构建产物会生成到 `dist/` 目录。
+Generated files are written to `dist/`.
 
-## 项目信息
+## Project Metadata
 
-- 包名：`vsce-downloads`
-- 导入名：`vsce_downloads`
-- CLI 命令：`vsced`
+- Package name: `vsce-downloads`
+- Import name: `vsce_downloads`
+- CLI command: `vsced`
 - Python: `>=3.7`
-- 运行时依赖：`requests>=2.25.0`
+- Runtime dependency: `requests>=2.25.0`

@@ -10,11 +10,14 @@ name = "vsce-downloads"
 version = "0.1.0"
 description = "Fetch VSCode Marketplace extension download & rating stats"
 license = {text = "MIT"}
-authors = [{name = "knighthood", email = "2109695291@qq.com"}]
+authors = [{name = "knighthood2001", email = "2109695291@qq.com"}]
 requires-python = ">=3.7"
 dependencies = [
   "requests>=2.25.0"
 ]
+
+[project.scripts]
+vsced = "vsce_downloads.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Knighthood2001/vsce-downloads"
