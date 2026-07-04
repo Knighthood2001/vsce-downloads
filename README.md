@@ -5,20 +5,74 @@
 获取 VSCode Marketplace 扩展的下载量、安装量、评分等统计数据。
 
 `vsce-downloads` 可以作为 Python 功能包使用，也可以作为命令行工具使用。
-安装后会提供 `vsced` 命令。
 
 ## 安装
 
-从当前项目目录安装：
+从 PyPI 安装：
 
 ```bash
-pip install .
+pip install vsce-downloads
 ```
 
-从已构建的 wheel 文件安装：
+安装后可以在 Python 中导入：
 
-```bash
-pip install dist/vsce_downloads-0.1.0-py3-none-any.whl
+```python
+import vsce_downloads
+```
+
+也可以使用命令行工具 `vsced`。
+
+## Python 用法
+
+格式化打印扩展统计信息：
+
+```python
+from vsce_downloads import print_stats
+
+print_stats("knighthood2001.ros2-quick-runner")
+```
+
+输出示例：
+
+```text
+==== VSCode 插件统计信息 ====
+插件名称：knighthood2001.ros2-quick-runner
+总安装量：182
+VSCode 编辑器内下载量：45
+VSIX 离线包网页下载量：137
+总更新次数：33
+平均评分：暂无评分
+评分人数：暂无评分
+当日新增安装：0.0
+周日均新增：0.00
+月日均新增：0.00
+```
+
+如果你想在代码里继续处理数据，可以使用 `get_extension_stats()`：
+
+```python
+from vsce_downloads import get_extension_stats
+
+stats = get_extension_stats("knighthood2001.ros2-quick-runner")
+print(stats["total_install"])
+print(stats["vscode_download"])
+print(stats["vsix_download"])
+```
+
+返回值是一个字典：
+
+```python
+{
+    "vscode_download": 45,
+    "vsix_download": 137,
+    "total_install": 182,
+    "update_count": 33,
+    "trending_daily": 0.0,
+    "trending_weekly": 0.0,
+    "trending_monthly": 0.0,
+    "average_rating": None,
+    "rating_count": None,
+}
 ```
 
 ## 命令行用法
@@ -26,13 +80,13 @@ pip install dist/vsce_downloads-0.1.0-py3-none-any.whl
 通过 VSCode 扩展 ID 查询统计数据：
 
 ```bash
-vsced ms-python.python
+vsced knighthood2001.ros2-quick-runner
 ```
 
 输出 JSON，便于脚本处理：
 
 ```bash
-vsced ms-python.python --json
+vsced knighthood2001.ros2-quick-runner --json
 ```
 
 查看已安装的 CLI 版本：
@@ -45,45 +99,25 @@ vsced --version
 
 ```text
 ==== VSCode 插件统计信息 ====
-总安装量：123456
-VSCode 编辑器内下载量：120000
-VSIX 离线包网页下载量：3456
-总更新次数：789
-平均评分：4.5
-评分人数：100
-当日新增安装：12.0
-周日均新增：34.00
-月日均新增：56.00
-```
-
-## Python 用法
-
-```python
-from vsce_downloads import get_extension_stats, print_stats
-
-print_stats("ms-python.python")
-
-stats = get_extension_stats("ms-python.python")
-print(stats["total_install"])
-```
-
-`get_extension_stats()` 返回一个字典：
-
-```python
-{
-    "vscode_download": 120000,
-    "vsix_download": 3456,
-    "total_install": 123456,
-    "update_count": 789,
-    "trending_daily": 12.0,
-    "trending_weekly": 34.0,
-    "trending_monthly": 56.0,
-    "average_rating": 4.5,
-    "rating_count": 100,
-}
+插件名称：knighthood2001.ros2-quick-runner
+总安装量：182
+VSCode 编辑器内下载量：45
+VSIX 离线包网页下载量：137
+总更新次数：33
+平均评分：暂无评分
+评分人数：暂无评分
+当日新增安装：0.0
+周日均新增：0.00
+月日均新增：0.00
 ```
 
 ## 开发与打包
+
+如果你是这个项目的维护者，可以从源码安装：
+
+```bash
+pip install .
+```
 
 构建源码包和 wheel 包：
 

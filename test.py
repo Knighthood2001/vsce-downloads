@@ -5,4 +5,5 @@ print_stats("knighthood2001.ros2-quick-runner")
 
 # 方式2：获取字典自行处理
 data = get_extension_stats("knighthood2001.ros2-quick-runner")
-print(data["average_rating"], data["rating_count"])
+print(data)
+print(data["vscode_download"], data["vsix_download"])

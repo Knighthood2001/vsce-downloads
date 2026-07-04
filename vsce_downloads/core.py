@@ -77,6 +77,7 @@ def print_stats(ext_id: str):
     """格式化打印统计信息"""
     stat = get_extension_stats(ext_id)
     print("==== VSCode 插件统计信息 ====")
+    print(f"插件名称：{ext_id}")
     print(f"总安装量：{stat['total_install']}")
     print(f"VSCode 编辑器内下载量：{stat['vscode_download']}")
     print(f"VSIX 离线包网页下载量：{stat['vsix_download']}")

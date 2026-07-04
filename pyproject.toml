@@ -7,9 +7,10 @@ packages = ["vsce_downloads"]
 
 [project]
 name = "vsce-downloads"
-version = "0.1.0"
+version = "0.1.1"
 description = "Fetch VSCode Marketplace extension download & rating stats"
-license = {text = "MIT"}
+readme = "README.md"
+license = { file = "LICENSE" }
 authors = [{name = "knighthood2001", email = "2109695291@qq.com"}]
 requires-python = ">=3.7"
 dependencies = [
