@@ -21,10 +21,15 @@ import vsce_downloads
 ```
 
 也可以使用命令行工具 `vsced`。
+## VSCode扩展ID获取
+1. VSCode Marketplace中
+
+2. Vscode 扩展中
+
 
 ## Python 用法
 
-格式化打印扩展统计信息：
+输入VSCode扩展ID，格式化打印扩展统计信息：
 
 ```python
 from vsce_downloads import print_stats
