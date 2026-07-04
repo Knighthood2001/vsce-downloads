@@ -2,9 +2,9 @@
 
 [中文](README.md)
 
-Fetch VSCode Marketplace extension download, install, and rating stats.
+Fetch download counts, installation statistics, ratings and other metrics for extensions hosted on the VS Code Marketplace.
 
-`vsce-downloads` can be used as a Python package or as a command line tool.
+`vsce-downloads` can be used both as a Python library and a command-line tool.
 
 ## Installation
 
@@ -14,130 +14,143 @@ Install from PyPI:
 pip install vsce-downloads
 ```
 
-Then import it in Python:
+After installation, you can import it in your Python project:
 
 ```python
 import vsce_downloads
 ```
 
-You can also use the `vsced` command line tool.
+You can also use the CLI tool `vsced` directly in your terminal.
+
+## How to Get Your VS Code Extension ID
+
+1. From the VS Code Marketplace extension detail page
+
+
+
+2. From your locally installed extensions panel in VS Code
+
+
 
 ## Python Usage
 
-Print formatted stats:
+Pass your VS Code extension ID to print formatted statistics:
 
 ```python
 from vsce_downloads import print_stats
 
-print_stats("knighthood2001.ros2-quick-runner")
+print_stats("knighthood2001.urdf-formatting")
 ```
 
-Example output:
+Sample output:
 
 ```text
-==== VSCode 插件统计信息 ====
-插件名称：knighthood2001.ros2-quick-runner
-总安装量：182
-VSCode 编辑器内下载量：45
-VSIX 离线包网页下载量：137
-总更新次数：33
-平均评分：暂无评分
-评分人数：暂无评分
+==== VSCode 扩展统计信息 ====
+扩展ID：knighthood2001.urdf-formatting
+总安装量：1270
+VSCode 编辑器内下载量：919
+VSIX 离线包网页下载量：351
+总更新次数：146
+平均评分：5.0
+评分人数：1
 当日新增安装：0.0
-周日均新增：0.00
-月日均新增：0.00
+周日均新增：1.09
+月日均新增：4.58
 ```
 
-Use `get_extension_stats()` if you want to process the data in your own code:
+If you need to process the raw data programmatically, use `get_extension_stats()`:
 
 ```python
 from vsce_downloads import get_extension_stats
 
-stats = get_extension_stats("knighthood2001.ros2-quick-runner")
+stats = get_extension_stats("knighthood2001.urdf-formatting")
 print(stats["total_install"])
 print(stats["vscode_download"])
 print(stats["vsix_download"])
 ```
 
-It returns a dictionary:
+Returned dictionary structure:
 
 ```python
 {
-    "vscode_download": 45,
-    "vsix_download": 137,
-    "total_install": 182,
-    "update_count": 33,
-    "trending_daily": 0.0,
-    "trending_weekly": 0.0,
-    "trending_monthly": 0.0,
-    "average_rating": None,
-    "rating_count": None,
+  "vscode_download": 919,
+  "vsix_download": 351,
+  "total_install": 1270,
+  "update_count": 146,
+  "trending_daily": 0.0,
+  "trending_weekly": 1.0893246187363834,
+  "trending_monthly": 4.57516339869281,
+  "average_rating": 5.0,
+  "rating_count": 1
 }
 ```
 
-## CLI Usage
+## Command Line Usage
 
-Query a VSCode extension by its Marketplace id:
-
-```bash
-vsced knighthood2001.ros2-quick-runner
-```
-
-Print JSON for scripts:
+Query statistics with your VS Code extension ID:
 
 ```bash
-vsced knighthood2001.ros2-quick-runner --json
+vsced knighthood2001.urdf-formatting
 ```
 
-Show the installed CLI version:
+Output raw JSON for script integration:
+
+```bash
+vsced knighthood2001.urdf-formatting --json
+```
+
+Sample JSON output:
+
+```json
+{
+  "vscode_download": 919,
+  "vsix_download": 351,
+  "total_install": 1270,
+  "update_count": 146,
+  "trending_daily": 0.0,
+  "trending_weekly": 1.0893246187363834,
+  "trending_monthly": 4.57516339869281,
+  "average_rating": 5.0,
+  "rating_count": 1
+}
+```
+
+Check the installed CLI version:
 
 ```bash
 vsced --version
 ```
 
-Example output:
+## Development & Packaging
 
-```text
-==== VSCode 插件统计信息 ====
-插件名称：knighthood2001.ros2-quick-runner
-总安装量：182
-VSCode 编辑器内下载量：45
-VSIX 离线包网页下载量：137
-总更新次数：33
-平均评分：暂无评分
-评分人数：暂无评分
-当日新增安装：0.0
-周日均新增：0.00
-月日均新增：0.00
-```
-
-## Development
-
-Install from a local checkout:
+Install from source for local development:
 
 ```bash
 pip install .
 ```
 
-Build source and wheel distributions:
+Build source distribution and wheel package:
 
 ```bash
 python3 -m build
 ```
 
-If your local Python environment does not have `venv` or a new enough
-`setuptools`, this legacy command can also build the package:
+If your environment lacks `venv` or uses an older `setuptools` version, use the legacy build command:
 
 ```bash
 python3 setup.py sdist bdist_wheel
 ```
 
-Generated files are written to `dist/`.
+Built artifacts will be generated under the `dist/` directory.
 
-## Project Metadata
+## Project Information
 
-- Package name: `vsce-downloads`
-- Import name: `vsce_downloads`
-- CLI command: `vsced`
-- Python: `>=3.7`
-- Runtime dependency: `requests>=2.25.0`
+- PyPI Package Name: `vsce-downloads`
+- Python Import Name: `vsce_downloads`
+- CLI Command: `vsced`
+- Python Version Requirement: `>=3.7`
+- Dependency: `requests>=2.25.0`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
